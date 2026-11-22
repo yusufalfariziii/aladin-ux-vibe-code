@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.1.1] — 2026-11-23
+### Updated
+- Menambahkan URL GitHub Pages yang telah berhasil dipublikasikan ke README.
+- Memperbarui status publikasi prototype.
+
 ## [0.1.0] — 2026-11-23
 ### Added
 - PRD berdasarkan kebutuhan UX Worksheet 8.
@@ -12,4 +17,4 @@
 ### Notes
 - Data merchant, nomor VA, dan nominal pada prototype hanya simulasi.
 - Belum ada integrasi dengan sistem pembayaran atau layanan perbankan nyata.
-- Aktivasi GitHub Pages perlu memilih **GitHub Actions** pada Settings → Pages.
+- GitHub Pages deployment berhasil melalui GitHub Actions.
