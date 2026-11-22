@@ -11,11 +11,12 @@ Fokus: pengalaman pembayaran belanja online menggunakan Virtual Account (VA).
 - [Ringkasan Worksheet 12](docs/WORKSHEET12-SUMMARY.md)
 
 ## Prototype
-- [Buka Prototype Interaktif](prototype/index.html)
+- **[Buka Prototype Aladin — GitHub Pages](https://yusufalfariziii.github.io/aladin-ux-vibe-code/)**
+- [Kode HTML](prototype/index.html)
 - [Kode JavaScript](prototype/assets/script.js)
 - [Styling CSS](prototype/assets/styles.css)
 
-Prototype memiliki dua cabang demo: VA tersedia dan VA tidak tersedia. Data transaksi adalah simulasi; prototype tidak terhubung ke layanan pembayaran nyata.
+Prototype memiliki dua skenario demonstrasi: VA tersedia dan VA tidak tersedia. Data merchant dan transaksi hanya simulasi.
 
 ## Wireframe
 - [Layar 1 — Bayar & Beli](wireframe/wireframe-01.svg)
@@ -24,14 +25,11 @@ Prototype memiliki dua cabang demo: VA tersedia dan VA tidak tersedia. Data tran
 - [Layar 4 — VA Tidak Tersedia](wireframe/wireframe-04.svg)
 - [Layar 5 — Metode Pembayaran Alternatif](wireframe/wireframe-05.svg)
 
-## Menjalankan
+## Menjalankan secara lokal
 Buka `prototype/index.html` di browser. Tidak membutuhkan backend atau instalasi dependency.
 
-## Publikasi GitHub Pages
-1. Buka **Settings → Pages** pada repository.
-2. Pada **Build and deployment**, pilih **GitHub Actions** sebagai Source.
-3. Push perubahan ke branch `main` atau jalankan workflow **Deploy prototype to GitHub Pages** secara manual dari tab Actions.
-4. Setelah workflow berhasil, prototype dapat dibuka melalui URL Pages yang ditampilkan GitHub.
+## Deployment
+Prototype dipublikasikan melalui GitHub Pages menggunakan GitHub Actions. Workflow deployment terakhir berhasil dijalankan pada 23 November 2026.
 
 ## Batasan
 Ini adalah prototype konseptual untuk tugas UX, bukan aplikasi resmi Aladin. Tidak melakukan transaksi uang, tidak membuat VA sungguhan, dan tidak memiliki integrasi backend/core banking.
