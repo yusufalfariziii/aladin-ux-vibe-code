@@ -7,7 +7,7 @@ Bertindak sebagai senior UI/UX engineer dan frontend developer. Implementasikan 
 1. `PRD.md`
 2. Worksheet 8 UX Requirements
 3. Worksheet 12 wireframe
-4. Screenshot Aladin sebagai referensi visual konseptual
+4. aplikasi Aladin sebagai visual konseptual
 
 ## Wajib
 - Lima layar saling terhubung.
