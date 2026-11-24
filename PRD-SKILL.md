@@ -7,7 +7,7 @@
 | Pemilik | M. Yusuf Al-Farizi |
 | NIM | 202310370311482 |
 | Dokumen acuan | PRD.md, Worksheet 8, Worksheet 12, wireframe pada folder `wireframe/` |
-| Target hasil | Prototype web interaktif lima layar |
+| Target hasil | Aplikasi frontend React + Vite dengan lima layar aktivitas yang saling terhubung |
 | Bahasa antarmuka | Bahasa Indonesia |
 | Status | Skill/instruksi pengembangan prototype konseptual |
 
@@ -15,7 +15,7 @@
 
 ## 1. Peran dan Tanggung Jawab
 
-Bertindak sebagai **UI/UX Engineer sekaligus Frontend Developer** yang mengimplementasikan PRD menjadi prototype web mobile-first. Utamakan kebutuhan pengguna, alur yang mudah dipahami, konsistensi visual, aksesibilitas dasar, dan kode yang mudah dipelihara.
+Bertindak sebagai **UI/UX Engineer sekaligus Frontend Developer** yang mengimplementasikan PRD menjadi aplikasi frontend React + Vite mobile-first. Utamakan kebutuhan pengguna, alur yang mudah dipahami, konsistensi visual, aksesibilitas dasar, dan kode yang mudah dipelihara.
 
 Hasil yang dibuat merupakan prototype pembelajaran. Jangan menyatakan aplikasi terhubung dengan sistem Aladin sungguhan atau memproses transaksi nyata.
 
@@ -112,22 +112,47 @@ Gunakan screenshot yang diberikan sebagai **inspirasi bahasa visual**, bukan unt
 | Aksi konfirmasi | Hanya menampilkan feedback UI. Tidak boleh mengirim permintaan pembayaran. |
 | Pilihan metode | Hanya mencatat pilihan di UI; tidak menghubungi penyedia pembayaran. |
 
-## 9. Panduan Teknis dan Struktur Kode
+## 9. Panduan Teknis dan Struktur Project
 
-Gunakan struktur yang sederhana dan mudah dibaca. Pertahankan struktur repository yang sudah tersedia, kecuali ada alasan teknis yang kuat untuk mengubahnya.
+Gunakan React dan Vite sebagai fondasi aplikasi frontend. Pertahankan struktur project yang jelas dan tempatkan seluruh source code aplikasi pada folder `src/`.
 
 | Path | Tanggung jawab |
 |---|---|
-| `index.html` | Halaman masuk yang mengarahkan ke prototype. |
-| `prototype/index.html` | Kerangka halaman dan elemen utama prototype. |
-| `prototype/assets/styles.css` | Warna, tipografi, layout, komponen, responsivitas, dan focus state. |
-| `prototype/assets/script.js` | Perpindahan layar, state pilihan metode, navigasi kembali, dan feedback simulasi. |
-| `wireframe/` | Lima wireframe yang menjadi dokumentasi desain. |
+| `index.html` | Entry point HTML untuk Vite dan elemen root React. |
+| `src/main.jsx` | Menginisialisasi React dan memuat stylesheet utama. |
+| `src/App.jsx` | Komponen layar, state aplikasi, navigasi, event handler, dan interaksi pengguna. |
+| `src/styles.css` | Sistem warna, tipografi, layout, responsive design, komponen, dan focus state. |
+| `package.json` | Dependency serta script `dev`, `build`, dan `preview`. |
+| `vite.config.js` | Konfigurasi Vite dan base path untuk GitHub Pages. |
+| `wireframe/` | Lima wireframe yang menjadi dokumen desain. |
 | `PRD.md` | Kebutuhan produk dan UX. |
 | `PRD-SKILL.md` | Instruksi implementasi ini. |
-| `CHANGELOG.md` | Catatan perubahan penting. |
+| `CHANGELOG.md` | Catatan perubahan project. |
+| `.github/workflows/pages.yml` | Workflow build production dan deployment GitHub Pages. |
 
-Prioritaskan HTML, CSS, dan JavaScript vanilla. Jangan menambah framework atau dependency hanya untuk kebutuhan yang dapat diselesaikan secara sederhana.
+### 9.1 Perintah Development
+
+| Perintah | Kegunaan |
+|---|---|
+| `npm install` | Menginstal dependency dari `package.json`. |
+| `npm run dev` | Menjalankan aplikasi pada development server lokal. |
+| `npm run build` | Memastikan aplikasi dapat di-build untuk production. |
+| `npm run preview` | Meninjau hasil build production secara lokal. |
+
+### 9.2 Aturan Kode
+- Gunakan komponen React yang dapat dibaca dan digunakan ulang bila sesuai.
+- Pisahkan struktur/logic dari styling.
+- Gunakan state React untuk perpindahan layar dan pilihan metode.
+- Jangan membuat tombol yang terlihat aktif tetapi tidak memiliki aksi.
+- Berikan feedback yang jelas untuk aksi yang disimulasikan.
+- Jangan menambahkan backend atau dependency baru tanpa kebutuhan yang jelas.
+- Pertahankan base path `/aladin-ux-vibe-code/` agar asset production berjalan di GitHub Pages.
+
+### 9.3 Aturan Build dan Deployment
+- Workflow harus menjalankan `npm install` lalu `npm run build`.
+- Folder yang dipublikasikan ke GitHub Pages adalah `dist/`, bukan source folder.
+- Setelah perubahan, periksa status GitHub Actions dan link GitHub Pages.
+- Jika build gagal, periksa log sebelum menyatakan deployment berhasil.
 
 ## 10. Kualitas, Aksesibilitas, dan Keamanan
 
@@ -146,7 +171,7 @@ Prioritaskan HTML, CSS, dan JavaScript vanilla. Jangan menambah framework atau d
 
 | No. | Langkah pengujian | Hasil yang diharapkan |
 |---|---|---|
-| 1 | Buka `index.html` atau `prototype/index.html`. | Halaman prototype tampil tanpa error. |
+| 1 | Jalankan `npm install` kemudian `npm run dev`, atau uji hasil production dengan `npm run build` dan `npm run preview`. | Halaman prototype tampil tanpa error. |
 | 2 | Pilih skenario VA tersedia. | Layar Virtual Account muncul. |
 | 3 | Lanjutkan ke konfirmasi. | Layar Konfirmasi Pembayaran muncul. |
 | 4 | Tekan konfirmasi simulasi. | Feedback menyatakan aksi hanya simulasi. |
@@ -170,7 +195,7 @@ Pekerjaan dianggap selesai apabila:
 - [ ] Tidak ada kredensial atau data transaksi nyata.
 - [ ] README menjelaskan cara menjalankan dan batas prototype.
 - [ ] CHANGELOG diperbarui.
-- [ ] Link GitHub Pages dapat dibuka setelah deployment berhasil.
+- [ ] Aplikasi hasil build pada link GitHub Pages dapat dibuka dan seluruh asset termuat dengan benar.
 
 ## 13. Cara Kerja Saat Melakukan Perubahan
 
