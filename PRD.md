@@ -10,7 +10,7 @@
 | Persona | Rani (nama samaran / persona komposit) |
 | Fokus proyek | Alur pembayaran belanja online menggunakan Virtual Account (VA) |
 | Versi dokumen | 1.1 |
-| Status | PRD untuk prototype konseptual |
+| Status | Frontend MVP (React + Vite), untuk prototype konseptual |
 
 ---
 
@@ -18,7 +18,7 @@
 
 Proyek ini merancang prototype pengalaman pembayaran belanja online pada aplikasi Aladin dengan fokus pada kebutuhan pengguna terhadap metode Virtual Account (VA). Rancangan berusaha membuat informasi metode pembayaran mudah ditemukan, status ketersediaan VA mudah dipahami, serta memberikan arahan ketika VA tidak tersedia.
 
-PRD ini menjadi acuan untuk pembuatan wireframe, prototype, dan pengembangan melalui Vibe Coding. Prototype bersifat konseptual untuk kebutuhan praktikum UX. Prototype tidak terhubung ke sistem Aladin, layanan perbankan, marketplace, payment gateway, atau transaksi uang sungguhan.
+PRD ini menjadi acuan untuk pembuatan wireframe, pengembangan frontend melalui Vibe Coding, dan evaluasi prototype. Implementasi project menggunakan React dan Vite dengan source code pada folder `src/`. Aplikasi frontend dapat dijalankan secara lokal dan dibangun untuk GitHub Pages. Aplikasi tetap bersifat konseptual untuk kebutuhan praktikum UX dan tidak terhubung ke sistem Aladin, layanan perbankan, marketplace, payment gateway, atau transaksi uang sungguhan.
 
 ## 2. Latar Belakang dan Dasar Penelitian
 
@@ -204,3 +204,53 @@ Dalam menyusun tampilan, rancangan mengacu pada beberapa elemen yang terlihat pa
 
 ---
 **Dokumen ini merupakan PRD untuk prototype konseptual tugas Rekayasa Interaksi (UX), bukan spesifikasi implementasi sistem perbankan produksi.**
+
+
+## 16. Implementasi Project
+
+Project diwujudkan sebagai aplikasi frontend berbasis React dan Vite. Bagian ini menjelaskan hasil implementasi teknis agar source project dapat dikenali dan dikembangkan lebih lanjut.
+
+| Komponen | Implementasi |
+|---|---|
+| Frontend framework | React |
+| Build tool | Vite |
+| Bahasa | JavaScript (JSX) |
+| Styling | CSS responsif |
+| Navigasi layar | State React pada aplikasi satu halaman (single-page interface) |
+| Penyimpanan | Tidak menggunakan database; state hanya untuk interaksi selama sesi prototype |
+| Deployment | GitHub Actions dan GitHub Pages |
+| Backend/API | Tidak ada pada versi ini |
+
+### 16.1 Struktur Project
+
+| Path | Fungsi |
+|---|---|
+| `index.html` | Entry point aplikasi Vite. |
+| `src/main.jsx` | Mount React ke elemen root. |
+| `src/App.jsx` | Komponen aplikasi, layar, navigasi, state, dan interaksi. |
+| `src/styles.css` | Gaya visual, layout responsif, dan komponen UI. |
+| `vite.config.js` | Konfigurasi build dan base path GitHub Pages. |
+| `package.json` | Dependency dan perintah development/build. |
+| `.github/workflows/pages.yml` | Build aplikasi dan deployment ke GitHub Pages. |
+| `wireframe/` | Dokumentasi lima rancangan layar. |
+
+### 16.2 Cara Menjalankan Project
+
+| Perintah | Fungsi |
+|---|---|
+| `npm install` | Menginstal dependency project. |
+| `npm run dev` | Menjalankan development server lokal Vite. |
+| `npm run build` | Membuat hasil build production ke folder `dist/`. |
+| `npm run preview` | Meninjau hasil build production secara lokal. |
+
+### 16.3 Status Implementasi
+
+| Area | Status |
+|---|---|
+| Frontend React | Diimplementasikan. |
+| Layar utama dan lima layar aktivitas | Diimplementasikan sebagai antarmuka frontend. |
+| Navigasi dan pilihan skenario | Diimplementasikan dengan state lokal. |
+| Data VA dan nominal | Data simulasi. |
+| Backend dan integrasi layanan bank | Belum termasuk dalam ruang lingkup. |
+| Pengujian pengguna formal | Belum dilaksanakan; perlu dilakukan pada tahap evaluasi berikutnya. |
+
