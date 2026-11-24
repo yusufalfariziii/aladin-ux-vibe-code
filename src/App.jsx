@@ -38,7 +38,7 @@ function BottomNav({ active = "home", onHome, onPayment }) {
   );
 }
 
-function Home({ goPayment }) {
+function Home({ goPayment, onHome }) {
   return (
     <>
       <Header />
@@ -77,12 +77,12 @@ function Home({ goPayment }) {
           <div className="saving-card"><div><strong>Ala Impian</strong><p>Rencanakan tujuan tabungan</p></div><span>★</span></div>
         </section>
       </main>
-      <BottomNav active="home" onHome={() => {}} onPayment={goPayment} />
+      <BottomNav active="home" onHome={onHome} onPayment={goPayment} />
     </>
   );
 }
 
-function PaymentMethods({ go, onBack }) {
+function PaymentMethods({ go, onBack, onHome, onQRIS }) {
   return (
     <>
       <Header title="Bayar & Beli" subtitle="Bayar kebutuhan dan belanja online dengan mudah." onBack={onBack} showBack />
@@ -111,12 +111,12 @@ function PaymentMethods({ go, onBack }) {
           <button className="text-link" onClick={() => go("unavailable")}>Lihat contoh VA tidak tersedia</button>
         </div>
       </main>
-      <BottomNav active="qris" onHome={onBack} onPayment={() => {}} />
+      <BottomNav active="qris" onHome={onHome} onPayment={onQRIS} />
     </>
   );
 }
 
-function VirtualAccount({ go, onBack }) {
+function VirtualAccount({ go, onBack, onHome, onQRIS }) {
   return (
     <>
       <Header title="Virtual Account" subtitle="Periksa status dan informasi pembayaran." onBack={onBack} showBack />
@@ -141,12 +141,12 @@ function VirtualAccount({ go, onBack }) {
         <button className="primary-button" onClick={() => go("confirm")}>Lanjutkan Pembayaran</button>
         <button className="secondary-button" onClick={() => go("unavailable")}>Lihat skenario VA tidak tersedia</button>
       </main>
-      <BottomNav active="qris" onHome={onBack} onPayment={() => {}} />
+      <BottomNav active="qris" onHome={onHome} onPayment={onQRIS} />
     </>
   );
 }
 
-function Confirmation({ onBack, onFinish }) {
+function Confirmation({ onBack, onFinish, onHome, onQRIS }) {
   return (
     <>
       <Header title="Konfirmasi Pembayaran" subtitle="Periksa informasi sebelum melanjutkan." onBack={onBack} showBack />
@@ -163,12 +163,12 @@ function Confirmation({ onBack, onFinish }) {
         <button className="primary-button" onClick={onFinish}>Konfirmasi (Simulasi)</button>
         <button className="secondary-button" onClick={onBack}>Kembali</button>
       </main>
-      <BottomNav active="qris" onHome={onBack} onPayment={() => {}} />
+      <BottomNav active="qris" onHome={onHome} onPayment={onQRIS} />
     </>
   );
 }
 
-function Unavailable({ go, onBack }) {
+function Unavailable({ go, onBack, onHome, onQRIS }) {
   return (
     <>
       <Header title="Pembayaran" subtitle="Informasi metode yang belum tersedia." onBack={onBack} showBack />
@@ -182,12 +182,12 @@ function Unavailable({ go, onBack }) {
         <button className="primary-button" onClick={() => go("alternatives")}>Pilih Metode Lain</button>
         <button className="secondary-button" onClick={onBack}>Kembali</button>
       </main>
-      <BottomNav active="qris" onHome={onBack} onPayment={() => {}} />
+      <BottomNav active="qris" onHome={onHome} onPayment={onQRIS} />
     </>
   );
 }
 
-function Alternatives({ onBack }) {
+function Alternatives({ onBack, onHome, onQRIS }) {
   const [selected, setSelected] = useState("QRIS");
   const [message, setMessage] = useState("");
   const methods = [
@@ -211,7 +211,7 @@ function Alternatives({ onBack }) {
         {message && <div className="feedback-message" role="status">{message}</div>}
         <button className="secondary-button" onClick={onBack}>Kembali</button>
       </main>
-      <BottomNav active="qris" onHome={onBack} onPayment={() => {}} />
+      <BottomNav active="qris" onHome={onHome} onPayment={onQRIS} />
     </>
   );
 }
@@ -228,26 +228,34 @@ export default function App() {
     window.scrollTo({top:0,behavior:"smooth"});
   };
   const back = () => {
-    setHistory(prev => {
-      if (!prev.length) { setScreen("home"); return []; }
-      const copy = [...prev];
-      setScreen(copy.pop());
-      return copy;
-    });
+    if (history.length > 0) {
+      setScreen(history[history.length - 1]);
+      setHistory(history.slice(0, -1));
+    } else {
+      setScreen("home");
+      setHistory([]);
+    }
     setNotice("");
     window.scrollTo({top:0,behavior:"smooth"});
   };
+  const goHome = () => {
+    setScreen("home");
+    setHistory([]);
+    setNotice("");
+    window.scrollTo({top:0,behavior:"smooth"});
+  };
+  const openPayments = () => go("payment");
   const finish = () => setNotice("Konfirmasi simulasi ditampilkan. Tidak ada transaksi nyata yang diproses.");
 
   let view;
   switch(screen) {
-    case "home": view = <Home goPayment={() => go("payment")} />; break;
-    case "payment": view = <PaymentMethods go={go} onBack={back} />; break;
-    case "va": view = <VirtualAccount go={go} onBack={back} />; break;
-    case "confirm": view = <Confirmation onBack={back} onFinish={finish} />; break;
-    case "unavailable": view = <Unavailable go={go} onBack={back} />; break;
-    case "alternatives": view = <Alternatives onBack={back} />; break;
-    default: view = <Home goPayment={() => go("payment")} />;
+    case "home": view = <Home goPayment={openPayments} onHome={goHome} />; break;
+    case "payment": view = <PaymentMethods go={go} onBack={back} onHome={goHome} onQRIS={openPayments} />; break;
+    case "va": view = <VirtualAccount go={go} onBack={back} onHome={goHome} onQRIS={openPayments} />; break;
+    case "confirm": view = <Confirmation onBack={back} onFinish={finish} onHome={goHome} onQRIS={openPayments} />; break;
+    case "unavailable": view = <Unavailable go={go} onBack={back} onHome={goHome} onQRIS={openPayments} />; break;
+    case "alternatives": view = <Alternatives onBack={back} onHome={goHome} onQRIS={openPayments} />; break;
+    default: view = <Home goPayment={openPayments} onHome={goHome} />;
   }
 
   return <div className="app-shell">{view}{notice && <div className="global-feedback" role="status">{notice}<button onClick={() => setNotice("")} aria-label="Tutup">×</button></div>}</div>;
