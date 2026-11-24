@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.0.1] — 2026-11-24
+### Updated
+- Memperbarui ringkasan Worksheet 12 agar mengarah ke aplikasi React yang sekarang menjadi project utama.
+- Memastikan tautan dokumentasi mengarah ke source code yang aktif.
+
+
 ## [1.0.0] — 2026-11-24
 ### Added
 - Membuat aplikasi frontend utama menggunakan React dan Vite.
