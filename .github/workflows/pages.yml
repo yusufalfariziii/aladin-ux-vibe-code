@@ -1,42 +1,35 @@
-name: Build and Deploy Aladin UX App to GitHub Pages
-
+name: Build and Deploy PRD Only Web App
 on:
   push:
     branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
   id-token: write
-
 concurrency:
   group: pages
   cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-
       - name: Install dependencies
+        working-directory: apps/web
         run: npm install
-
-      - name: Build production app
+      - name: Build web app
+        working-directory: apps/web
         run: npm run build
-
       - name: Upload production build
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
-
+          path: apps/web/dist
   deploy:
     environment:
       name: github-pages
